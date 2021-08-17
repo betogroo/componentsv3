@@ -1,25 +1,40 @@
 module.exports = {
   root: true,
+
   env: {
-    node: true,
+    node: true
   },
-  extends: ["plugin:vue/vue3-essential", "eslint:recommended", "@vue/prettier"],
+
   parserOptions: {
-    parser: "babel-eslint",
+    parser: 'babel-eslint'
   },
+
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'vue/attributes-order': 'warn',
+    'vue/order-in-components': 'warn',
+    'vue/prop-name-casing': 'warn',
+    'vue/require-default-prop': 'warn',
+    'vue/require-prop-types': 'warn',
+    'vue/v-bind-style': 'warn',
+    'vue/v-on-style': 'warn',
+    'vue/match-component-file-name': 'warn',
+    'vue/require-name-property': 'warn',
+    'vue/no-multiple-template-root': 'off'
   },
+
+  extends: ['plugin:vue/essential', 'eslint:recommended', '@vue/prettier'],
+
   overrides: [
     {
       files: [
-        "**/__tests__/*.{j,t}s?(x)",
-        "**/tests/unit/**/*.spec.{j,t}s?(x)",
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
       ],
       env: {
-        jest: true,
-      },
-    },
-  ],
-};
+        jest: true
+      }
+    }
+  ]
+}
