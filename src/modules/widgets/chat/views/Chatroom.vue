@@ -3,7 +3,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'Chatroom',
+
+  setup() {}
+}
 </script>
 
 <style></style>

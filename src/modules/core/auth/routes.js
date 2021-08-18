@@ -6,9 +6,7 @@ export default [
     meta: {
       title: 'Welcome',
       hideNav: true,
-      inNav: true,
-      icon: 'home-lightbulb',
-      isPublic: true
+      icon: 'home-lightbulb'
     }
   }
 ]
