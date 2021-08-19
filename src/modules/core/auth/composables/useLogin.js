@@ -9,7 +9,6 @@ const login = async (email, password) => {
     const res = await fbAuth.signInWithEmailAndPassword(email, password)
     error.value = null
     store.dispatch('auth/setLoggedUser', res.user)
-    console.log(res)
     return res
   } catch (err) {
     console.log(err.message)

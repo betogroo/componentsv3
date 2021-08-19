@@ -1,5 +1,4 @@
 <template>
-  <h1>Welcome {{ loggedUser.displayName }}</h1>
   <h3>Número Aleatório: {{ randomNumber }}</h3>
   <div v-if="showLogin">
     <login-form @login="enterChat"></login-form>
