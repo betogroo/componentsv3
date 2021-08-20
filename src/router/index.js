@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
-// import beforeEach from './beforeEach'
+import beforeEach from './beforeEach'
 // import afterEach from './afterEach'
 
 const router = createRouter({
@@ -8,7 +8,7 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach(beforeEach)
+router.beforeEach(beforeEach)
 // router.afterEach(afterEach)
 
 export default router

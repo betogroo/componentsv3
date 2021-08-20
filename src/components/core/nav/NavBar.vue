@@ -6,7 +6,12 @@
     <v-divider inset vertical></v-divider>
 
     <div v-if="user">
-      <v-btn class="mr-4 ml-5" color="primary" plain>
+      <v-btn
+        class="mr-4 ml-5"
+        color="primary"
+        plain
+        @click.prevent="goToProfile"
+      >
         <v-icon left icon="mdi-handshake-outline"></v-icon>
 
         <span>{{ loggedUser ? loggedUser.displayName : 'nada' }}</span>
@@ -38,15 +43,18 @@ export default {
     const handleClick = async () => {
       await logout()
       if (!error.value) {
-        console.log('User logout')
+        router.push({ name: 'Welcome' })
       }
     }
 
     const goToLogin = () => {
       router.push({ name: 'Welcome' })
     }
+    const goToProfile = () => {
+      router.push({ name: 'Profile', params: { id: loggedUser.value.uid } })
+    }
 
-    return { loggedUser, handleClick, user, goToLogin }
+    return { loggedUser, handleClick, user, goToLogin, goToProfile }
   }
 }
 </script>

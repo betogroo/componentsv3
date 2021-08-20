@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { fbAuth } from '@/plugins/firebase'
+import store from '@/store'
 // import store from '@/store'
 const error = ref(null)
 
@@ -7,6 +8,7 @@ const logout = async () => {
   error.value = null
   try {
     await fbAuth.signOut()
+    store.dispatch('auth/setLoggedUser', null)
     error.value = null
   } catch (err) {
     console.log(err.message)

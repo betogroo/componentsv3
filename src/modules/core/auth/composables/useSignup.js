@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { fbAuth } from '@/plugins/firebase'
+import useLogin from './useLogin'
 const error = ref(null)
 
 const signup = async (displayName, email, password, passwordConfirm) => {
@@ -13,8 +14,9 @@ const signup = async (displayName, email, password, passwordConfirm) => {
       throw new Error('Impossível se cadastrar.')
     }
     await res.user.updateProfile({ displayName })
+    const { login } = useLogin()
+    await login(email, password)
     error.value = null
-    console.log(res.user)
     return res
   } catch (err) {
     error.value = err.message
