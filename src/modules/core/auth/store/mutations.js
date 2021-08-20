@@ -6,7 +6,7 @@ export default {
       const { displayName, email, uid, photoURL, refreshToken } = payload
       state.loggedUser = { uid, displayName, email, photoURL, refreshToken }
     } else {
-      state.loggedUser = {}
+      state.loggedUser = null
     }
 
     // state.loggedUser = payload
