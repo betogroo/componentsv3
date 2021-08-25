@@ -1,6 +1,6 @@
 export default [
   {
-    path: '/',
+    path: '/welcome',
     name: 'Welcome',
     component: () => import(/* webpackChunkName: "login" */ './views/Welcome'),
     meta: {

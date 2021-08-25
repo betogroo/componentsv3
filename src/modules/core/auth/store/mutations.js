@@ -8,7 +8,5 @@ export default {
     } else {
       state.loggedUser = null
     }
-
-    // state.loggedUser = payload
   }
 }

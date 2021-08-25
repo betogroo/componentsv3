@@ -14,6 +14,7 @@ const signup = async (displayName, email, password, passwordConfirm) => {
       throw new Error('Impossível se cadastrar.')
     }
     await res.user.updateProfile({ displayName })
+    await res.user.sendEmailVerification()
     const { login } = useLogin()
     await login(email, password)
     error.value = null

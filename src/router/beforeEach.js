@@ -5,6 +5,8 @@ export default (to, from, next) => {
 
   if (to.name !== 'Welcome' && !user) {
     next({ name: 'Welcome' })
+  } else if (to.name === 'Welcome' && user) {
+    next({ name: 'Home' })
   } else {
     next()
   }

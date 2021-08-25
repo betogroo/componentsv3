@@ -12,7 +12,7 @@
       />
       <button type="submit">Cadastrar</button>
     </form>
-    <div>{{ error }}</div>
+    <h3>{{ error }}</h3>
   </v-card>
 </template>
 

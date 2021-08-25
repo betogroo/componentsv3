@@ -1,55 +1,69 @@
 <template>
-  <h3>Número Aleatório: {{ randomNumber }}</h3>
-  <div v-if="loggedUser">
-    <h3>{{ loggedUser.displayName }} você já pode entrar no chat</h3>
-    <v-btn @click="enterChat">Entrar no Chat</v-btn>
+  <h1>{{ title }}</h1>
+  <h3>{{ subtitle }}</h3>
+  <div v-if="showForm === 'login'" class="d-flex flex-column">
+    <login-form @login="gotoHome"></login-form>
+    <a @click.prevent="handleForm('signup')"
+      >Não tem conta? <strong>Cadastre-se</strong></a
+    >
+    <a @click.prevent="handleForm('reset')"
+      >Esqueceu a senha? <strong>Redefina</strong></a
+    >
   </div>
-  <div v-else>
-    <div v-if="showLogin">
-      <login-form @login="enterHome"></login-form>
-      <a @click="showLogin = false"
-        >Não tem conta? <strong>Cadastre-se</strong></a
-      >
-    </div>
-    <div v-else>
-      <signup-form @signup="enterHome"></signup-form>
-      <a @click="showLogin = true">Já tem conta? <strong>Faça Login</strong></a>
-    </div>
+  <div v-if="showForm === 'signup'" class="d-flex flex-column">
+    <signup-form @signup="gotoHome"></signup-form>
+    <a @click.prevent="handleForm('login')"
+      >Já tem conta? <strong>Faça Login</strong></a
+    >
+  </div>
+  <div v-if="showForm === 'reset'" class="d-flex flex-column">
+    <reset-password-form></reset-password-form>
+    <a @click.prevent="handleForm('login')"
+      >Já tem conta? <strong>Faça Login</strong></a
+    >
   </div>
 </template>
 
 <script>
-import utils from '@/utils/utils.js'
 import { ref } from 'vue'
 import router from '@/router'
 import SignupForm from '../components/SignupForm.vue'
 import LoginForm from '../components/LoginForm.vue'
+import ResetPasswordForm from '../components/ResetPasswordForm.vue'
 export default {
   name: 'Welcome',
 
   components: {
     SignupForm,
-    LoginForm
+    LoginForm,
+    ResetPasswordForm
   },
 
   setup() {
-    const showLogin = ref(false)
-    const enterHome = () => {
-      router.push({ name: 'Welcome' })
-    }
-    const enterChat = () => {
-      router.push({ name: 'Chatroom' })
-    }
-    return { showLogin, enterHome, enterChat }
-  },
+    const showForm = ref('login')
+    const title = ref('Login')
+    const subtitle = ref('Faça o login para ter acesso ao sistema')
 
-  computed: {
-    loggedUser() {
-      return this.$store.state.auth.loggedUser
-    },
-    randomNumber() {
-      return utils.randomInt(0, 10)
+    const gotoHome = () => {
+      router.push({ name: 'Home' })
     }
+
+    const handleForm = (form) => {
+      showForm.value = form
+      if (form === 'login') {
+        title.value = 'Login'
+        subtitle.value = 'Faça o login para ter acesso ao sistema'
+      }
+      if (form === 'signup') {
+        title.value = 'Cadastro'
+        subtitle.value = 'Cadastre-se para ter acesso ao sistema'
+      }
+      /* if (form === 'reset') {
+        title.value = 'Redefinir Senha'
+        subtitle.value = 'Entre com seu email para redefinir a senha'
+      } */
+    }
+    return { showForm, title, subtitle, gotoHome, handleForm }
   }
 }
 </script>

@@ -5,8 +5,12 @@ import store from '@/store'
 const user = ref(fbAuth.currentUser)
 
 fbAuth.onAuthStateChanged((_user) => {
-  user.value = _user
-  store.dispatch('auth/setLoggedUser', _user)
+  if (_user) {
+    user.value = _user
+    store.dispatch('auth/setLoggedUser', _user)
+  } else {
+    store.dispatch('auth/setLoggedUser', null)
+  }
 })
 
 const getUser = () => {

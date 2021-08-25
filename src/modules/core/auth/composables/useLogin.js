@@ -11,7 +11,7 @@ const login = async (email, password) => {
     store.dispatch('auth/setLoggedUser', res.user)
     return res
   } catch (err) {
-    store.dispatch('auth/setLoggedUser', {})
+    store.dispatch('auth/setLoggedUser', null)
     console.log(err.message)
     error.value = err.message
   }
