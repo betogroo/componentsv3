@@ -8,7 +8,7 @@ const getCollection = (collection) => {
   let collectionRef = fbFirestore.collection(collection).orderBy('createdAt')
   collectionRef.onSnapshot((snap) => {
     let results = []
-    snap.docs.foreEach(
+    snap.docs.forEach(
       (doc) => {
         doc.data().createdAt && results.push({ ...doc.data(), id: doc.id })
       },
