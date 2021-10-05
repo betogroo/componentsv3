@@ -16,8 +16,6 @@ export default {
       type: 'submit'
     }))
 
-    console.log(btnDefaults.value)
-
     return { btnDefaults }
   }
 }

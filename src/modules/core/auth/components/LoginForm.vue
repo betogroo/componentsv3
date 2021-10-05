@@ -1,14 +1,13 @@
 <template>
-  <v-card>
+  <app-card>
     <v-card-title>Entre</v-card-title>
     <form @submit.prevent="handleSubmit">
       <input v-model="email" type="email" placeholder="Email" />
       <input v-model="password" type="password" placeholder="Senha" />
-      <button type="submit">Entrar</button>
       <app-btn prepend-icon="mdi-login">Entrar</app-btn>
       <h3 v-if="error">{{ error }}</h3>
     </form>
-  </v-card>
+  </app-card>
 </template>
 
 <script>
