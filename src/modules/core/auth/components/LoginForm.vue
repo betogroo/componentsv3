@@ -1,9 +1,26 @@
 <template>
   <app-card>
     <v-card-title>Entre</v-card-title>
+    <div>
+      <p>
+        {{ email }}
+      </p>
+      <p>
+        {{ password }}
+      </p>
+    </div>
     <form @submit.prevent="handleSubmit">
-      <input v-model="email" type="email" placeholder="Email" />
-      <input v-model="password" type="password" placeholder="Senha" />
+      <app-textfield
+        v-model="email"
+        type="text"
+        placeholder="Email"
+      ></app-textfield>
+      <app-textfield
+        v-model="password"
+        type="password"
+        placeholder="Senha"
+      ></app-textfield>
+
       <app-btn prepend-icon="mdi-login">Entrar</app-btn>
       <h3 v-if="error">{{ error }}</h3>
     </form>
