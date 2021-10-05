@@ -13,7 +13,7 @@
 import { computed } from 'vue'
 import store from '@/store'
 import router from '@/router'
-import NavBar from '@/components/core/nav/NavBar'
+import { NavBar } from '@/components/layout/nav'
 export default {
   name: 'App',
 
