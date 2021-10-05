@@ -5,6 +5,7 @@
       <input v-model="email" type="email" placeholder="Email" />
       <input v-model="password" type="password" placeholder="Senha" />
       <button type="submit">Entrar</button>
+      <app-btn prepend-icon="mdi-login">Entrar</app-btn>
       <h3 v-if="error">{{ error }}</h3>
     </form>
   </v-card>
