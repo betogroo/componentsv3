@@ -7,11 +7,12 @@
 
 <script>
 import { computed } from 'vue'
-import store from '@/store'
+import { useStore } from 'vuex'
 export default {
   name: 'Home',
 
   setup() {
+    const store = useStore()
     const loggedUser = computed(() => {
       return store.state.auth.loggedUser
     })

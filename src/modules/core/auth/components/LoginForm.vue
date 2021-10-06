@@ -1,30 +1,27 @@
 <template>
-  <app-card>
-    <v-card-title>Entre</v-card-title>
-    <div>
-      <p>
-        {{ email }}
-      </p>
-      <p>
-        {{ password }}
-      </p>
-    </div>
-    <form @submit.prevent="handleSubmit">
-      <app-textfield
-        v-model="email"
-        type="text"
-        placeholder="Email"
-      ></app-textfield>
-      <app-textfield
-        v-model="password"
-        type="password"
-        placeholder="Senha"
-      ></app-textfield>
+  <form @submit.prevent="handleSubmit">
+    <v-row>
+      <v-col cols="12">
+        <app-textfield
+          v-model="email"
+          type="text"
+          placeholder="Email"
+        ></app-textfield>
+      </v-col>
+      <v-col cols="12">
+        <app-textfield
+          v-model="password"
+          type="password"
+          placeholder="Senha"
+        ></app-textfield>
+      </v-col>
+      <v-col cols="12">
+        <app-btn block prepend-icon="mdi-login">Entrar</app-btn>
+      </v-col>
+    </v-row>
 
-      <app-btn prepend-icon="mdi-login">Entrar</app-btn>
-      <h3 v-if="error">{{ error }}</h3>
-    </form>
-  </app-card>
+    <h3 v-if="error">{{ error }}</h3>
+  </form>
 </template>
 
 <script>

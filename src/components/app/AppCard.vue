@@ -12,7 +12,7 @@ export default {
   setup() {
     const cardDefaults = computed(() => ({
       color: 'primary',
-      variant: 'outlined'
+      elevation: 0
     }))
 
     return { cardDefaults }

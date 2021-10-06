@@ -4,11 +4,12 @@
 </template>
 
 <script>
-import router from '@/router'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Notfound',
 
   setup() {
+    const router = useRouter()
     const backPage = () => {
       router.go(-1)
     }

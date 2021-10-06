@@ -7,7 +7,7 @@
           ? 'mobile-banner-card'
           : 'desktop-banner-card'
       "
-      color="default"
+      color="primary"
     >
     </app-card>
 
@@ -24,8 +24,9 @@
         <span class="text-subtitle">{{ subtitle }}</span>
       </div>
       <app-card
-        flat
-        :width="cardWidth"
+        elevation="24"
+        color="#FFF"
+        :width="$vuetify.display.xs ? '90vw' : '400px'"
         :class="
           $vuetify.display.mdAndDown
             ? 'mobile-login-card'
@@ -41,7 +42,7 @@
                 @click.prevent="handleForm('signup')"
               >
                 Ainda não tem conta?
-                <strong> Cadastre-se {{ name }} </strong>
+                <strong> Cadastre-se</strong>
               </a>
             </v-col>
           </v-row>
@@ -89,9 +90,9 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import utils from '@/utils/utils.js'
-import router from '@/router'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 import { SignupForm, LoginForm, ResetPasswordForm } from '../components'
 export default {
   name: 'Welcome',
@@ -103,6 +104,7 @@ export default {
   },
 
   setup() {
+    const router = useRouter()
     const showForm = ref('login')
     const title = ref('Login')
     const subtitle = ref('Faça o login para ter acesso ao sistema')
@@ -127,17 +129,12 @@ export default {
       }
     }
 
-    const cardWidth = computed(() => {
-      return utils.breakpointSize()
-    })
     return {
       showForm,
-      cardWidth,
       title,
       subtitle,
       gotoHome,
-      handleForm,
-      name
+      handleForm
     }
   }
 }
@@ -172,12 +169,13 @@ export default {
   border-bottom-right-radius: 8px !important;
 }
 .mobile-login-card {
+  margin-bottom: 20;
   padding-top: 20px;
   padding-bottom: 20px;
   margin-right: auto;
   margin-left: auto;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
+  /* box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12) !important; */
 }
 .desktop-banner-card {
   width: 100vw;
