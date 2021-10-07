@@ -1,18 +1,15 @@
 <template>
-  <h1>Perfil - {{ id }}</h1>
+  <h1>Perfil</h1>
+  <profile></profile>
 </template>
 
 <script>
+import { Profile } from '../components'
 export default {
-  name: 'Profile',
+  name: 'ViewProfile',
 
-  props: {
-    id: {
-      type: String,
-      required: true
-    }
+  components: {
+    Profile
   }
 }
 </script>
-
-<style></style>
