@@ -26,9 +26,11 @@
 
 <script>
 import { ref } from 'vue'
-import useLogin from '@/modules/core/auth/composables/useLogin'
+import { useLogin } from '@/modules/core/auth/composables'
 export default {
-  name: 'SifnupForm',
+  name: 'LoginForm',
+
+  emits: ['login'],
 
   setup(props, { emit }) {
     const { error, login } = useLogin()
