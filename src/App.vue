@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <template v-if="loggedUser">
-      <nav-bar />
+      <nav-bar :loggedUser="loggedUser" />
     </template>
     <v-main>
       <router-view />
@@ -11,8 +11,8 @@
 
 <script>
 import { computed } from 'vue'
-import store from '@/store'
-import router from '@/router'
+import { useStore } from 'vuex'
+import { useDisplay } from 'vuetify/lib/composables/display'
 import { NavBar } from '@/components/layout/nav'
 export default {
   name: 'App',
@@ -22,14 +22,15 @@ export default {
   },
 
   setup() {
-    const currentRoute = computed(() => {
-      return router.currentRoute.value
-    })
+    const store = useStore()
+    const { name: displayName } = useDisplay()
     const loggedUser = computed(() => {
       return store.state.auth.loggedUser
     })
 
-    return { currentRoute, loggedUser }
+    console.log(displayName.value)
+
+    return { loggedUser, displayName }
   }
 }
 </script>

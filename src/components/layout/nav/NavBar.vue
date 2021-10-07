@@ -5,7 +5,7 @@
 
     <v-divider inset vertical></v-divider>
 
-    <div v-if="user">
+    <div v-if="loggedUser">
       <v-btn
         class="mr-4 ml-5"
         color="primary"
@@ -25,20 +25,21 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import router from '@/router'
-import useLogout from '@/modules/core/auth/composables/useLogout'
-import getUser from '@/modules/core/auth/composables/getUser'
-import store from '@/store'
+import { useRouter } from 'vue-router'
+import { useLogout } from '@/modules/core/auth/composables'
 export default {
   name: 'NavBar',
 
+  props: {
+    loggedUser: {
+      type: Object,
+      required: true
+    }
+  },
+
   setup() {
+    const router = useRouter()
     const { error, logout } = useLogout()
-    const { user } = getUser()
-    const loggedUser = computed(() => {
-      return store.state.auth.loggedUser
-    })
 
     const handleClick = async () => {
       await logout()
@@ -51,10 +52,10 @@ export default {
       router.push({ name: 'Welcome' })
     }
     const goToProfile = () => {
-      router.push({ name: 'Profile', params: { id: loggedUser.value.uid } })
+      router.push({ path: '/profile' })
     }
 
-    return { loggedUser, handleClick, user, goToLogin, goToProfile }
+    return { handleClick, goToLogin, goToProfile }
   }
 }
 </script>
