@@ -3,13 +3,6 @@ import router from '@/router/'
 
 const routes = router.options.routes
 class Utils {
-  useRoute() {
-    return router.app._route
-  }
-  /* uuid4() {
-    return uuid4()
-  } */
-
   breakpointSize(data, width = {}) {
     let val = ''
     const xs = width.xs || '90vw'
@@ -17,6 +10,7 @@ class Utils {
     const md = width.md || 400
     const lg = width.lg || 400
     const xl = width.xl || 400
+    const xxl = width.xxl || 400
     switch (data) {
       case 'xs':
         val = xs
@@ -32,9 +26,19 @@ class Utils {
         break
       case 'xl':
         val = xl
+        break
+      case 'xxl':
+        val = xxl
     }
     return val
   }
+
+  useRoute() {
+    return router.app._route
+  }
+  /* uuid4() {
+    return uuid4()
+  } */
 
   delay(amount = 2000) {
     return new Promise((resolve) => setTimeout(resolve, amount))
