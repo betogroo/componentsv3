@@ -1,5 +1,9 @@
 <template>
-  <app-card flat :class="$vuetify.display.mdAndDown ? 'mobile' : 'desktop'">
+  <app-card
+    color="tranparent"
+    flat
+    :class="$vuetify.display.mdAndDown ? 'mobile' : 'desktop'"
+  >
     <app-card
       flat
       :class="
@@ -18,71 +22,73 @@
     >
       <div
         class="d-flex flex-column text-center pb-6"
-        :class="$vuetify.display.mdAndDown ? 'white--text' : 'default--text'"
+        :class="$vuetify.display.mdAndDown ? 'text-white' : 'default--text'"
       >
         <span class="text-h4 pb-2">{{ title }}</span>
         <span class="text-subtitle">{{ subtitle }}</span>
       </div>
       <app-card
-        elevation="24"
+        class="ma-4"
         color="#FFF"
-        :width="$vuetify.display.xs ? '90vw' : '400px'"
+        flat
+        :width="cardWidth"
         :class="
           $vuetify.display.mdAndDown
             ? 'mobile-login-card'
             : 'desktop-login-card'
         "
-      >
-        <div v-if="showForm === 'login'">
-          <login-form @login="gotoHome"></login-form>
-          <v-row no-gutters>
-            <v-col cols="12" class="text-center pt-4">
-              <a
-                class="text-decoration-none default--text"
-                @click.prevent="handleForm('signup')"
-              >
-                Ainda não tem conta?
-                <strong> Cadastre-se</strong>
-              </a>
-            </v-col>
-          </v-row>
-          <v-row no-gutters>
-            <v-col cols="12" class="text-center pt-4">
-              <a
-                class="text-decoration-none default--text"
-                @click.prevent="handleForm('reset')"
-              >
-                Esqueceu a senha?
-                <strong> Redefina</strong>
-              </a>
-            </v-col>
-          </v-row>
-        </div>
-        <div v-if="showForm === 'signup'">
-          <signup-form @signup="gotoHome"></signup-form>
-          <v-row no-gutters>
-            <v-col cols="12" class="text-center pt-4">
-              <a
-                class="text-decoration-none default--text"
-                @click.prevent="handleForm('login')"
-              >
-                Já é cadastrado? Faça o <strong> login </strong>
-              </a>
-            </v-col>
-          </v-row>
-        </div>
-        <div v-if="showForm === 'reset'">
-          <reset-password-form @reset="gotoHome"></reset-password-form>
-          <v-row no-gutters>
-            <v-col cols="12" class="text-center pt-4">
-              <a
-                class="text-decoration-none default--text"
-                @click.prevent="handleForm('login')"
-              >
-                Já é cadastrado? Faça o <strong> login </strong>
-              </a>
-            </v-col>
-          </v-row>
+        ><div class="ma-4">
+          <div v-if="showForm === 'login'">
+            <login-form @login="gotoHome"></login-form>
+            <v-row no-gutters>
+              <v-col cols="12" class="text-center pt-4">
+                <a
+                  class="text-decoration-none default--text"
+                  @click.prevent="handleForm('signup')"
+                >
+                  Ainda não tem conta?
+                  <strong> Cadastre-se</strong>
+                </a>
+              </v-col>
+            </v-row>
+            <v-row no-gutters>
+              <v-col cols="12" class="text-center pt-4">
+                <a
+                  class="text-decoration-none default--text"
+                  @click.prevent="handleForm('reset')"
+                >
+                  Esqueceu a senha?
+                  <strong> Redefina</strong>
+                </a>
+              </v-col>
+            </v-row>
+          </div>
+          <div v-if="showForm === 'signup'">
+            <signup-form @signup="gotoHome"></signup-form>
+            <v-row no-gutters>
+              <v-col cols="12" class="text-center pt-4">
+                <a
+                  class="text-decoration-none default--text"
+                  @click.prevent="handleForm('login')"
+                >
+                  Já é cadastrado? Faça o <strong> login </strong>
+                </a>
+              </v-col>
+            </v-row>
+          </div>
+          <div v-if="showForm === 'reset'">
+            <reset-password-form @reset="gotoHome"></reset-password-form>
+            <v-row no-gutters>
+              <v-col cols="12" class="text-center pt-4">
+                <a
+                  class="text-decoration-none default--text"
+                  @click.prevent="handleForm('login')"
+                >
+                  Já é cadastrado? Faça o <strong> login </strong>
+                </a>
+              </v-col>
+            </v-row>
+          </div>
         </div>
       </app-card>
     </app-card>
@@ -90,8 +96,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useDisplay } from 'vuetify/lib/composables/display'
+import utils from '@/utils/utils'
 
 import { SignupForm, LoginForm, ResetPasswordForm } from '../components'
 export default {
@@ -104,6 +112,7 @@ export default {
   },
 
   setup() {
+    const { name: displayName } = useDisplay()
     const router = useRouter()
     const showForm = ref('login')
     const title = ref('Login')
@@ -112,6 +121,10 @@ export default {
     const gotoHome = () => {
       router.push({ name: 'Home' })
     }
+
+    const cardWidth = computed(() => {
+      return utils.breakpointSize(displayName.value)
+    })
 
     const handleForm = (form) => {
       showForm.value = form
@@ -134,7 +147,8 @@ export default {
       title,
       subtitle,
       gotoHome,
-      handleForm
+      handleForm,
+      cardWidth
     }
   }
 }
@@ -145,6 +159,9 @@ export default {
   margin-top: -150px;
 }
 .desktop-card {
+  display: flex;
+  flex-direction: column;
+  flex: none;
   margin-top: auto;
   margin-bottom: auto;
 }
@@ -169,13 +186,13 @@ export default {
   border-bottom-right-radius: 8px !important;
 }
 .mobile-login-card {
+  margin-right: auto !important;
+  margin-left: auto !important;
   margin-bottom: 20;
   padding-top: 20px;
   padding-bottom: 20px;
-  margin-right: auto;
-  margin-left: auto;
-  /* box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-    0 1px 10px 0 rgba(0, 0, 0, 0.12) !important; */
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12) !important;
 }
 .desktop-banner-card {
   width: 100vw;
