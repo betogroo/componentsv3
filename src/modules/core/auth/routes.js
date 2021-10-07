@@ -10,10 +10,9 @@ export default [
     }
   },
   {
-    path: '/profile/:id',
-    name: 'Profile',
+    path: '/profile',
+    name: 'ViewProfile',
     component: () => import(/* webpackChunkName: "login" */ './views/Profile'),
-    props: true,
     meta: {
       title: 'Profile'
     }
