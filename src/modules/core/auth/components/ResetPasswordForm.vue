@@ -9,20 +9,24 @@
       </v-col>
     </v-row>
   </form>
-  <h3>{{ error }}</h3>
+  <error-form>{{ error }}</error-form>
 </template>
 
 <script>
 import { ref } from 'vue'
-import useResetPassword from '../composables/useResetPassword'
+import { useResetPassword } from '../composables'
+import ErrorForm from './ErrorForm'
 export default {
   name: 'ResetPasswordForm',
+
+  components: {
+    ErrorForm
+  },
 
   emits: ['reset'],
 
   setup() {
     const { error, reset } = useResetPassword()
-
     const email = ref('')
 
     const handleSubmit = async () => {
@@ -31,9 +35,7 @@ export default {
 
     return {
       error,
-
       email,
-
       handleSubmit
     }
   }

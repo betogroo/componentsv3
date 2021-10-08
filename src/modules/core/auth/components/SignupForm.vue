@@ -12,12 +12,12 @@
         <app-textfield v-model="email" type="email" placeholder="Email" />
       </v-col>
       <v-col cols="12">
-        <app-textfield v-model="password" type="text" placeholder="Senha" />
+        <app-textfield v-model="password" type="password" placeholder="Senha" />
       </v-col>
       <v-col cols="12">
         <app-textfield
           v-model="passwordConfirm"
-          type="text"
+          type="password"
           placeholder="Confirme a Senha"
         />
       </v-col>
@@ -26,23 +26,31 @@
       </v-col>
     </v-row>
   </form>
-  <h3>{{ error }}</h3>
+  <error-form>{{ error }}</error-form>
 </template>
 
 <script>
 import { ref } from 'vue'
-import { useSignup } from '../composables'
+import { useSignup, useAuthErrors } from '../composables'
+import ErrorForm from './ErrorForm'
 export default {
   name: 'SignupForm',
+
+  components: {
+    ErrorForm
+  },
 
   emits: ['signup'],
 
   setup(props, { emit }) {
-    const { error, signup } = useSignup()
+    const { error: signupError, signup } = useSignup()
     const displayName = ref('betogroo')
     const email = ref('betogroo@gmail.com')
     const password = ref('123456')
     const passwordConfirm = ref('123456')
+
+    const { searchError } = useAuthErrors()
+    const error = ref('')
 
     const handleSubmit = async () => {
       await signup(
@@ -51,8 +59,10 @@ export default {
         password.value,
         passwordConfirm.value
       )
-      if (!error.value) {
+      if (!signupError.value) {
         emit('signup')
+      } else {
+        error.value = searchError(signupError.value)
       }
     }
 

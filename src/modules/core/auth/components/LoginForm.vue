@@ -4,6 +4,7 @@
       <v-col cols="12">
         <app-textfield
           v-model="email"
+          prependIcon="email"
           type="text"
           placeholder="Email"
         ></app-textfield>
@@ -11,6 +12,7 @@
       <v-col cols="12">
         <app-textfield
           v-model="password"
+          prependIcon="lock"
           type="password"
           placeholder="Senha"
         ></app-textfield>
@@ -19,28 +21,37 @@
         <app-btn block prepend-icon="mdi-login">Entrar</app-btn>
       </v-col>
     </v-row>
-
-    <h3 v-if="error">{{ error }}</h3>
+    <error-form>{{ error }}</error-form>
   </form>
 </template>
 
 <script>
 import { ref } from 'vue'
-import { useLogin } from '@/modules/core/auth/composables'
+import { useLogin, useAuthErrors } from '@/modules/core/auth/composables'
+import ErrorForm from './ErrorForm'
 export default {
   name: 'LoginForm',
+
+  components: {
+    ErrorForm
+  },
 
   emits: ['login'],
 
   setup(props, { emit }) {
-    const { error, login } = useLogin()
+    const { error: loginError, login } = useLogin()
+    const { searchError } = useAuthErrors()
+    const error = ref('')
+
     const email = ref('betogroo@gmail.com')
     const password = ref('123456')
 
     const handleSubmit = async () => {
       await login(email.value, password.value)
-      if (!error.value) {
+      if (!loginError.value) {
         emit('login')
+      } else {
+        error.value = searchError(loginError.value)
       }
     }
 
