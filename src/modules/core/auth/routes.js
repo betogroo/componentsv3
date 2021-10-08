@@ -1,8 +1,10 @@
 export default [
   {
-    path: '/welcome',
+    path: '/welcome/:mode?',
     name: 'Welcome',
-    component: () => import(/* webpackChunkName: "login" */ './views/Welcome'),
+    component: () =>
+      import(/* webpackChunkName: "welcome" */ './views/Welcome'),
+    props: (route) => ({ mode: route.params.mode || 'login' }),
     meta: {
       title: 'Welcome',
       hideNav: true,
@@ -12,7 +14,8 @@ export default [
   {
     path: '/profile',
     name: 'ViewProfile',
-    component: () => import(/* webpackChunkName: "login" */ './views/Profile'),
+    component: () =>
+      import(/* webpackChunkName: "profile" */ './views/Profile'),
     meta: {
       title: 'Profile'
     }
