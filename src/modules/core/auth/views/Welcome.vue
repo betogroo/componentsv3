@@ -1,16 +1,8 @@
 <template>
-  <app-card
-    color="tranparent"
-    flat
-    :class="$vuetify.display.mdAndDown ? 'mobile' : 'desktop'"
-  >
+  <app-card color="tranparent" flat :class="mobile ? 'mobile' : 'desktop'">
     <app-card
       flat
-      :class="
-        $vuetify.display.mdAndDown
-          ? 'mobile-banner-card'
-          : 'desktop-banner-card'
-      "
+      :class="mobile ? 'mobile-banner-card' : 'desktop-banner-card'"
       color="primary"
     >
     </app-card>
@@ -18,11 +10,11 @@
     <app-card
       flat
       color="transparent"
-      :class="$vuetify.display.mdAndDown ? 'mobile-card' : 'desktop-card'"
+      :class="mobile ? 'mobile-card' : 'desktop-card'"
     >
       <div
         class="d-flex flex-column text-center pb-6"
-        :class="$vuetify.display.mdAndDown ? 'text-white' : 'default--text'"
+        :class="mobile ? 'text-white' : 'default--text'"
       >
         <span class="text-h4 pb-2">{{ title }}</span>
         <span class="text-subtitle">{{ subtitle }}</span>
@@ -32,11 +24,7 @@
         color="#FFF"
         flat
         :width="cardWidth"
-        :class="
-          $vuetify.display.mdAndDown
-            ? 'mobile-login-card'
-            : 'desktop-login-card'
-        "
+        :class="mobile ? 'mobile-login-card' : 'desktop-login-card'"
         ><div class="ma-4">
           <div v-if="mode === 'login'">
             <login-form @login="gotoHome"></login-form>
@@ -78,9 +66,7 @@
           </div>
           <div v-if="mode === 'reset'">
             <reset-password-form
-              @reset="
-                $router.push({ path: '/welcome', params: { mode: 'login' } })
-              "
+              @reset="$router.push({ path: '/welcome' })"
             ></reset-password-form>
             <v-row no-gutters>
               <v-col cols="12" class="text-center pt-4">
@@ -93,6 +79,7 @@
               </v-col>
             </v-row>
           </div>
+          <span>{{ breakpointName }}</span>
         </div>
       </app-card>
     </app-card>
@@ -123,7 +110,7 @@ export default {
   },
 
   setup() {
-    const { name: displayName } = useDisplay()
+    const { name: breakpointName, mobile } = useDisplay()
     const router = useRouter()
     // const showForm = ref('login')
     const title = ref('Login')
@@ -134,7 +121,7 @@ export default {
     }
 
     const cardWidth = computed(() => {
-      return utils.breakpointSize(displayName.value)
+      return utils.breakpointSize(breakpointName.value)
     })
 
     const changeMode = (mode) => {
@@ -159,7 +146,9 @@ export default {
       subtitle,
       gotoHome,
       changeMode,
-      cardWidth
+      cardWidth,
+      mobile,
+      breakpointName
     }
   }
 }

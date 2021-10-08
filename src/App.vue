@@ -12,7 +12,7 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { useDisplay } from 'vuetify/lib/composables/display'
+
 import { NavBar } from '@/components/layout/nav'
 export default {
   name: 'App',
@@ -23,14 +23,12 @@ export default {
 
   setup() {
     const store = useStore()
-    const { name: displayName } = useDisplay()
+
     const loggedUser = computed(() => {
       return store.state.auth.loggedUser
     })
 
-    console.log(displayName.value)
-
-    return { loggedUser, displayName }
+    return { loggedUser }
   }
 }
 </script>

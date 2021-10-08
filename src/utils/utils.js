@@ -6,7 +6,7 @@ class Utils {
   breakpointSize(data, width = {}) {
     let val = ''
     const xs = width.xs || '90vw'
-    const sm = width.sm || 400
+    const sm = width.sm || 540
     const md = width.md || 400
     const lg = width.lg || 400
     const xl = width.xl || 400
