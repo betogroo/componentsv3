@@ -10,31 +10,43 @@
     </v-row>
   </form>
   <error-form>{{ error }}</error-form>
+  <overlay-loading :active="isPending"></overlay-loading>
 </template>
 
 <script>
 import { ref } from 'vue'
-import { useResetPassword } from '../composables'
+import { useResetPassword, useAuthErrors } from '../composables'
 import ErrorForm from './ErrorForm'
+import { OverlayLoading } from '@/components/layout/loading'
 export default {
   name: 'ResetPasswordForm',
 
   components: {
-    ErrorForm
+    ErrorForm,
+    OverlayLoading
   },
 
   emits: ['reset'],
 
-  setup() {
-    const { error, reset } = useResetPassword()
+  setup(props, { emit }) {
+    const { error: resetError, isPending, reset } = useResetPassword()
+    const { searchError } = useAuthErrors()
     const email = ref('')
+    const error = ref('')
 
     const handleSubmit = async () => {
       await reset(email.value)
+      if (!resetError.value) {
+        emit('reset')
+      } else {
+        error.value = searchError(resetError.value)
+      }
     }
 
     return {
       error,
+      resetError,
+      isPending,
       email,
       handleSubmit
     }

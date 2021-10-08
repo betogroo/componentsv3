@@ -1,7 +1,7 @@
 <template>
-  <h3 class="text-red text-caption text-center py-4">
+  <p class="text-red text-body-1 text-center py-4">
     <slot />
-  </h3>
+  </p>
 </template>
 
 <script>

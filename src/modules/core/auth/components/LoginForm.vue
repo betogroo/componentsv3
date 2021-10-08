@@ -22,6 +22,7 @@
       </v-col>
     </v-row>
     <error-form>{{ error }}</error-form>
+    <overlay-loading :active="isPending"></overlay-loading>
   </form>
 </template>
 
@@ -29,17 +30,19 @@
 import { ref } from 'vue'
 import { useLogin, useAuthErrors } from '@/modules/core/auth/composables'
 import ErrorForm from './ErrorForm'
+import { OverlayLoading } from '@/components/layout/loading'
 export default {
   name: 'LoginForm',
 
   components: {
-    ErrorForm
+    ErrorForm,
+    OverlayLoading
   },
 
   emits: ['login'],
 
   setup(props, { emit }) {
-    const { error: loginError, login } = useLogin()
+    const { error: loginError, isPending, login } = useLogin()
     const { searchError } = useAuthErrors()
     const error = ref('')
 
@@ -55,7 +58,7 @@ export default {
       }
     }
 
-    return { password, email, error, handleSubmit }
+    return { password, email, error, isPending, handleSubmit }
   }
 }
 </script>
