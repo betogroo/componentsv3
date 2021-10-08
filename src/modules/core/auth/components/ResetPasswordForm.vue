@@ -5,7 +5,7 @@
         <app-textfield v-model="email" type="email" placeholder="Email" />
       </v-col>
       <v-col cols="12">
-        <app-btn block prepend0icon="mdi-lock-question">Redefinir</app-btn>
+        <app-btn block prependIcon="mdi-lock-reset">Redefinir</app-btn>
       </v-col>
     </v-row>
   </form>
