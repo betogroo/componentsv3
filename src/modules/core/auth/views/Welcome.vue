@@ -38,13 +38,13 @@
             : 'desktop-login-card'
         "
         ><div class="ma-4">
-          <div v-if="showForm === 'login'">
+          <div v-if="mode === 'login'">
             <login-form @login="gotoHome"></login-form>
             <v-row no-gutters>
               <v-col cols="12" class="text-center pt-4">
                 <a
                   class="text-decoration-none default--text"
-                  @click.prevent="handleForm('signup')"
+                  @click.prevent="changeMode('signup')"
                 >
                   Ainda não tem conta?
                   <strong> Cadastre-se</strong>
@@ -55,7 +55,7 @@
               <v-col cols="12" class="text-center pt-4">
                 <a
                   class="text-decoration-none default--text"
-                  @click.prevent="handleForm('reset')"
+                  @click.prevent="changeMode('reset')"
                 >
                   Esqueceu a senha?
                   <strong> Redefina</strong>
@@ -63,26 +63,30 @@
               </v-col>
             </v-row>
           </div>
-          <div v-if="showForm === 'signup'">
+          <div v-if="mode === 'signup'">
             <signup-form @signup="gotoHome"></signup-form>
             <v-row no-gutters>
               <v-col cols="12" class="text-center pt-4">
                 <a
                   class="text-decoration-none default--text"
-                  @click.prevent="handleForm('login')"
+                  @click.prevent="changeMode('login')"
                 >
                   Já é cadastrado? Faça o <strong> login </strong>
                 </a>
               </v-col>
             </v-row>
           </div>
-          <div v-if="showForm === 'reset'">
-            <reset-password-form @reset="gotoHome"></reset-password-form>
+          <div v-if="mode === 'reset'">
+            <reset-password-form
+              @reset="
+                $router.push({ path: '/welcome', params: { mode: 'login' } })
+              "
+            ></reset-password-form>
             <v-row no-gutters>
               <v-col cols="12" class="text-center pt-4">
                 <a
                   class="text-decoration-none default--text"
-                  @click.prevent="handleForm('login')"
+                  @click.prevent="changeMode('login')"
                 >
                   Já é cadastrado? Faça o <strong> login </strong>
                 </a>
@@ -111,10 +115,17 @@ export default {
     ResetPasswordForm
   },
 
+  props: {
+    mode: {
+      type: String,
+      default: 'login'
+    }
+  },
+
   setup() {
     const { name: displayName } = useDisplay()
     const router = useRouter()
-    const showForm = ref('login')
+    // const showForm = ref('login')
     const title = ref('Login')
     const subtitle = ref('Faça o login para ter acesso ao sistema')
 
@@ -126,28 +137,28 @@ export default {
       return utils.breakpointSize(displayName.value)
     })
 
-    const handleForm = (form) => {
-      showForm.value = form
-      if (form === 'login') {
+    const changeMode = (mode) => {
+      router.push({ name: 'Welcome', params: { mode: mode } })
+      if (mode === 'login') {
         title.value = 'Login'
         subtitle.value = 'Faça o login para ter acesso ao sistema'
       }
-      if (form === 'signup') {
+      if (mode === 'signup') {
         title.value = 'Cadastro'
         subtitle.value = 'Cadastre-se para ter acesso ao sistema'
       }
-      if (form === 'reset') {
+      if (mode === 'reset') {
         title.value = 'Redefinir Senha'
         subtitle.value = 'Entre com seu email para redefinir a senha'
       }
     }
 
     return {
-      showForm,
+      // showForm,
       title,
       subtitle,
       gotoHome,
-      handleForm,
+      changeMode,
       cardWidth
     }
   }
