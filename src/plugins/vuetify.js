@@ -6,7 +6,7 @@ import * as directives from 'vuetify/lib/directives'
 
 export default createVuetify({
   display: {
-    mobileBreakpoint: 1120
+    mobileBreakpoint: 'md'
   },
   components,
   directives
