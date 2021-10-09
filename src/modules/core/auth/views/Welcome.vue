@@ -79,7 +79,7 @@
               </v-col>
             </v-row>
           </div>
-          <span>{{ breakpointName }}</span>
+          <span>{{ breakpointName }} - {{ cardWidth }}</span>
         </div>
       </app-card>
     </app-card>
@@ -90,9 +90,9 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDisplay } from 'vuetify/lib/composables/display'
-import utils from '@/utils/utils'
-
+import { useUtils } from '@/composables'
 import { SignupForm, LoginForm, ResetPasswordForm } from '../components'
+
 export default {
   name: 'Welcome',
 
@@ -111,6 +111,7 @@ export default {
 
   setup() {
     const { name: breakpointName, mobile } = useDisplay()
+    const { breakpointCardSize } = useUtils()
     const router = useRouter()
     // const showForm = ref('login')
     const title = ref('Login')
@@ -121,7 +122,7 @@ export default {
     }
 
     const cardWidth = computed(() => {
-      return utils.breakpointSize(breakpointName.value)
+      return breakpointCardSize(breakpointName.value)
     })
 
     const changeMode = (mode) => {
