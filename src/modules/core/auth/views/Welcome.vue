@@ -16,8 +16,8 @@
         class="d-flex flex-column text-center pb-6"
         :class="mobile ? 'text-white' : 'default--text'"
       >
-        <span class="text-h4 pb-2">{{ title }}</span>
-        <span class="text-subtitle">{{ subtitle }}</span>
+        <span class="text-h4 pb-2">{{ pageInfo.title }}</span>
+        <span class="text-subtitle">{{ pageInfo.subtitle }}</span>
       </div>
       <app-card
         class="ma-4"
@@ -87,10 +87,11 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDisplay } from 'vuetify/lib/composables/display'
 import { useUtils } from '@/composables'
+import { getPageInfo } from '../composables'
 import { SignupForm, LoginForm, ResetPasswordForm } from '../components'
 
 export default {
@@ -109,13 +110,13 @@ export default {
     }
   },
 
-  setup() {
+  setup(props) {
     const { name: breakpointName, mobile } = useDisplay()
     const { breakpointCardSize } = useUtils()
+    const { pageInfo, loadInfo } = getPageInfo()
     const router = useRouter()
-    // const showForm = ref('login')
-    const title = ref('Login')
-    const subtitle = ref('Faça o login para ter acesso ao sistema')
+
+    loadInfo(props.mode)
 
     const gotoHome = () => {
       router.push({ name: 'Home' })
@@ -125,26 +126,19 @@ export default {
       return breakpointCardSize(breakpointName.value)
     })
 
+    watch(
+      () => props.mode,
+      () => {
+        loadInfo(props.mode)
+      }
+    )
+
     const changeMode = (mode) => {
-      router.push({ name: 'Welcome', params: { mode: mode } })
-      if (mode === 'login') {
-        title.value = 'Login'
-        subtitle.value = 'Faça o login para ter acesso ao sistema'
-      }
-      if (mode === 'signup') {
-        title.value = 'Cadastro'
-        subtitle.value = 'Cadastre-se para ter acesso ao sistema'
-      }
-      if (mode === 'reset') {
-        title.value = 'Redefinir Senha'
-        subtitle.value = 'Entre com seu email para redefinir a senha'
-      }
+      router.push({ name: 'Welcome', params: { mode } })
     }
 
     return {
-      // showForm,
-      title,
-      subtitle,
+      pageInfo,
       gotoHome,
       changeMode,
       cardWidth,
