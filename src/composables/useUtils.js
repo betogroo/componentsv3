@@ -1,4 +1,9 @@
 const useUtils = () => {
+  const delay = (amount = 2000) => {
+    console.log(`Delay de ${amount / 1000} segundos`)
+    return new Promise((resolve) => setTimeout(resolve, amount))
+  }
+
   const breakpointCardSize = (data, width = {}) => {
     let val = ''
     const xs = width.xs || '90vw'
@@ -29,7 +34,7 @@ const useUtils = () => {
     return val
   }
 
-  return { breakpointCardSize }
+  return { breakpointCardSize, delay }
 }
 
 export default useUtils

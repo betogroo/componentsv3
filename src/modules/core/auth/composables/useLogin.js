@@ -1,15 +1,15 @@
 import { ref } from 'vue'
 import { fbAuth } from '@/plugins/firebase'
 import store from '@/store'
-import utils from '@/utils/utils'
-//const store = useStore()
+import { useUtils } from '@/composables'
 const error = ref(null)
 const isPending = ref(false)
+const { delay } = useUtils()
 
 const login = async (email, password) => {
   error.value = null
   isPending.value = true
-  await utils.delay()
+  await delay()
   try {
     const res = await fbAuth.signInWithEmailAndPassword(email, password)
     if (!res) {
