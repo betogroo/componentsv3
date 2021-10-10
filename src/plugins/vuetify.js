@@ -11,12 +11,12 @@ import {
   VOverlay,
   VIcon,
   VAppBar,
+  VAppBarNavIcon,
   VAppBarTitle,
   VDivider,
   VSpacer
 } from 'vuetify/lib/components'
 // import * as directives from 'vuetify/lib/directives'
-
 export default createVuetify({
   display: {
     mobileBreakpoint: 'md'
@@ -31,6 +31,7 @@ export default createVuetify({
     VOverlay,
     VIcon,
     VAppBar,
+    VAppBarNavIcon,
     VAppBarTitle,
     VDivider,
     VSpacer

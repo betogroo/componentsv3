@@ -1,34 +1,32 @@
 <template>
-  <v-app-bar density="compact">
-    <v-app-bar-title>Components V3</v-app-bar-title>
+  <app-bar density="compact">
+    <app-bar-nav-icon></app-bar-nav-icon>
+    <app-bar-title>Components V3</app-bar-title>
     <v-spacer></v-spacer>
-
-    <v-divider inset vertical></v-divider>
-
     <div v-if="loggedUser">
-      <v-btn
-        class="mr-4 ml-5"
-        color="primary"
-        plain
-        @click.prevent="goToProfile"
-      >
-        <v-icon left icon="mdi-handshake-outline"></v-icon>
-
-        <span>{{ loggedUser ? loggedUser.displayName : 'nada' }}</span>
-      </v-btn>
-      <v-btn @click.prevent="handleClick">Sair</v-btn>
+      <app-btn variant="text" @click="gotoProfile">{{
+        loggedUser.displayName
+      }}</app-btn>
+      <app-btn variant="text" @click="handleClick">Sair</app-btn>
     </div>
     <div v-else>
-      <v-btn @click.prevent="goToLogin">Login</v-btn>
+      <app-btn variant="text" @click="gotoLogin">Login</app-btn>
     </div>
-  </v-app-bar>
+  </app-bar>
 </template>
 
 <script>
 import { useRouter } from 'vue-router'
 import { useLogout } from '@/modules/core/auth/composables'
+import { AppBar, AppBarNavIcon, AppBarTitle } from './app'
 export default {
   name: 'NavBar',
+
+  components: {
+    AppBar,
+    AppBarNavIcon,
+    AppBarTitle
+  },
 
   props: {
     loggedUser: {
@@ -48,14 +46,14 @@ export default {
       }
     }
 
-    const goToLogin = () => {
+    const gotoLogin = () => {
       router.push({ name: 'Welcome' })
     }
-    const goToProfile = () => {
+    const gotoProfile = () => {
       router.push({ path: '/profile' })
     }
 
-    return { handleClick, goToLogin, goToProfile }
+    return { handleClick, gotoLogin, gotoProfile }
   }
 }
 </script>
