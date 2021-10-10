@@ -2,7 +2,7 @@
   <app-bar density="compact">
     <app-bar-nav-icon></app-bar-nav-icon>
     <app-bar-title>Components V3</app-bar-title>
-    <v-spacer></v-spacer>
+    <app-spacer></app-spacer>
     <div v-if="loggedUser">
       <app-btn variant="text" @click="gotoProfile">{{
         loggedUser.displayName
