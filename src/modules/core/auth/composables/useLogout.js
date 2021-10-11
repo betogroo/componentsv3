@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { fbAuth } from '@/plugins/firebase'
+import { fbAuth, signOut } from '@/plugins/firebase'
 import store from '@/store'
 import { useUtils } from '@/composables'
 const error = ref(null)
@@ -11,7 +11,7 @@ const logout = async () => {
   await delay()
   isPending.value = true
   try {
-    await fbAuth.signOut()
+    await signOut(fbAuth)
     store.dispatch('auth/setLoggedUser', null)
     error.value = null
     isPending.value = false

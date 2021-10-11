@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-import { fbAuth } from '@/plugins/firebase.js'
+import { fbAuth, onAuthStateChanged } from '@/plugins/firebase.js'
 
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
@@ -16,7 +16,7 @@ const requireComponent = require.context(
 
 let app
 
-fbAuth.onAuthStateChanged(() => {
+onAuthStateChanged(fbAuth, () => {
   if (!app) {
     app = createApp(App)
     requireComponent.keys().forEach((fileName) => {

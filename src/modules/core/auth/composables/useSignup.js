@@ -1,5 +1,10 @@
 import { ref } from 'vue'
-import { fbAuth } from '@/plugins/firebase'
+import {
+  fbAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile
+} from '@/plugins/firebase'
 import useLogin from './useLogin'
 import { useUtils } from '@/composables'
 const error = ref(null)
@@ -49,12 +54,12 @@ const signup = async (displayName, email, password, passwordConfirm) => {
         message: 'Passwords do not match'
       }
     }
-    const res = await fbAuth.createUserWithEmailAndPassword(email, password)
+    const res = await createUserWithEmailAndPassword(fbAuth, email, password)
     if (!res) {
       throw { code: 'auth/generic-signup-error', message: 'Generic error' }
     }
-    await res.user.updateProfile({ displayName })
-    await res.user.sendEmailVerification()
+    await updateProfile(res.user, { displayName })
+    await sendEmailVerification(res.user)
     const { login } = useLogin()
     await login(email, password)
     error.value = null

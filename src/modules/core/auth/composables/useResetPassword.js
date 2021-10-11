@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { fbAuth } from '@/plugins/firebase'
+import { fbAuth, sendPasswordResetEmail } from '@/plugins/firebase'
 import { useUtils } from '@/composables'
 
 const error = ref(null)
@@ -11,7 +11,7 @@ const reset = async (email) => {
   isPending.value = true
   await delay()
   try {
-    const res = await fbAuth.sendPasswordResetEmail(email)
+    const res = await sendPasswordResetEmail(fbAuth, email)
     console.log('REset paawrod ' + email + ' ' + res)
     isPending.value = false
     error.value = null

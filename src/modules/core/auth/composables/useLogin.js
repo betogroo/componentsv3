@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { fbAuth } from '@/plugins/firebase'
+import { fbAuth, signInWithEmailAndPassword } from '@/plugins/firebase'
 import store from '@/store'
 import { useUtils } from '@/composables'
 const error = ref(null)
@@ -9,9 +9,10 @@ const { delay } = useUtils()
 const login = async (email, password) => {
   error.value = null
   isPending.value = true
+
   await delay()
   try {
-    const res = await fbAuth.signInWithEmailAndPassword(email, password)
+    const res = await signInWithEmailAndPassword(fbAuth, email, password)
     if (!res) {
       throw { code: 'auth/generic-login-error', message: 'Generic Login Error' }
     }

@@ -1,11 +1,17 @@
-// import Vue from 'vue'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-// import 'firebase/storage'
-// import 'firebase/database'
+import { initializeApp } from 'firebase/app'
 
-firebase.initializeApp({
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged
+} from 'firebase/auth'
+
+initializeApp({
   apiKey: process.env.VUE_APP_API_KEY,
   authDomain: process.env.VUE_APP_AUTH_DOMAIN,
   projectId: process.env.VUE_APP_PROJECT_ID,
@@ -14,12 +20,16 @@ firebase.initializeApp({
   appId: process.env.VUE_APP_APP_ID
 })
 
-// firebase.initializeApp(firebaseConfig)
+const fbAuth = getAuth()
 
-export default firebase
-
-const fbAuth = firebase.auth()
-const fbFirestore = firebase.firestore()
-const fbTimestamp = firebase.firestore.FieldValue.serverTimestamp
-
-export { fbFirestore, fbTimestamp, fbAuth }
+export {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signOut,
+  fbAuth,
+  onAuthStateChanged
+}
