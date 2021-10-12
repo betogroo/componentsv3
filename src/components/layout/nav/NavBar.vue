@@ -1,61 +1,66 @@
 <template>
-  <app-bar density="compact">
-    <app-bar-nav-icon></app-bar-nav-icon>
-    <app-bar-title>Components V3</app-bar-title>
+  <app-bar density="comfortable">
+    <app-bar-nav-icon @click="toggleDrawer"></app-bar-nav-icon>
+    <app-spacer v-if="ios"></app-spacer>
+    <app-bar-title>{{ currentRoute.meta.title || 'AppName' }}</app-bar-title>
     <app-spacer></app-spacer>
-    <div v-if="loggedUser">
-      <app-btn variant="text" @click="gotoProfile">{{
-        loggedUser.displayName
-      }}</app-btn>
-      <app-btn variant="text" @click="handleClick">Sair</app-btn>
-    </div>
-    <div v-else>
-      <app-btn variant="text" @click="gotoLogin">Login</app-btn>
-    </div>
+
+    <nav-bar-actions :displayWidth="displayWidth"></nav-bar-actions>
+
+    <app-icon
+      class="mr-2"
+      :icon="!ios ? 'dots-vertical' : 'dots-horizontal'"
+      @click="toggleOverflow"
+    >
+    </app-icon>
   </app-bar>
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
-import { useLogout } from '@/modules/core/auth/composables'
 import { AppBar, AppBarNavIcon, AppBarTitle } from './app'
+import NavBarActions from './NavBarActions'
+import { useRouter } from 'vue-router'
 export default {
   name: 'NavBar',
 
   components: {
     AppBar,
     AppBarNavIcon,
-    AppBarTitle
+    AppBarTitle,
+    NavBarActions
   },
 
   props: {
     loggedUser: {
       type: Object,
       required: true
+    },
+    displayWidth: {
+      type: Number,
+      required: true
+    },
+    ios: {
+      type: Boolean,
+      required: true
     }
   },
 
   setup() {
-    const router = useRouter()
-    const { error, logout } = useLogout()
+    const { currentRoute } = useRouter()
 
-    const handleClick = async () => {
-      await logout()
-      if (!error.value) {
-        router.push({ name: 'Welcome' })
-      }
+    const toggleDrawer = () => {
+      console.log('ToggleDrawer')
     }
 
-    const gotoLogin = () => {
-      router.push({ name: 'Welcome' })
-    }
-    const gotoProfile = () => {
-      router.push({ path: '/profile' })
+    const toggleOverflow = () => {
+      console.log('toggleOverflow')
     }
 
-    return { handleClick, gotoLogin, gotoProfile }
+    return {
+      currentRoute,
+      toggleDrawer,
+      toggleOverflow
+    }
   }
 }
 </script>
-
-<style></style>

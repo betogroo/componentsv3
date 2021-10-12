@@ -1,7 +1,11 @@
 <template>
   <v-app>
     <template v-if="loggedUser">
-      <nav-bar :loggedUser="loggedUser" />
+      <nav-bar
+        :ios="platform.ios"
+        :displayWidth="displayWidth"
+        :loggedUser="loggedUser"
+      />
     </template>
     <v-main>
       <router-view />
@@ -12,6 +16,7 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useDisplay } from 'vuetify/lib/composables/display'
 
 import { NavBar } from '@/components/layout/nav'
 export default {
@@ -23,12 +28,13 @@ export default {
 
   setup() {
     const store = useStore()
+    const { width: displayWidth, platform } = useDisplay()
 
     const loggedUser = computed(() => {
       return store.state.auth.loggedUser
     })
 
-    return { loggedUser }
+    return { loggedUser, displayWidth, platform }
   }
 }
 </script>
