@@ -35,7 +35,7 @@ export default {
 
   setup() {
     const actionItemOne = () => {
-      console.log('ActionItemOne1')
+      console.log('ActionItemOne')
     }
     const actionItemTwo = () => {
       console.log('ActionItemTwo')
