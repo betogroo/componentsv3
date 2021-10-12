@@ -2,12 +2,23 @@
   <div>
     <h1>Home</h1>
     <h1 v-if="loggedUser">{{ loggedUser.email }}</h1>
+    <div v-if="loggedUser">
+      <app-btn variant="text" @click="gotoProfile">{{
+        loggedUser.displayName
+      }}</app-btn>
+      <app-btn variant="text" @click="handleClick">Sair</app-btn>
+    </div>
+    <div v-else>
+      <app-btn variant="text" @click="gotoLogin">Login</app-btn>
+    </div>
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { useLogout } from '@/modules/core/auth/composables'
 export default {
   name: 'Home',
 
@@ -16,8 +27,24 @@ export default {
     const loggedUser = computed(() => {
       return store.state.auth.loggedUser
     })
+    const router = useRouter()
+    const { error, logout } = useLogout()
 
-    return { loggedUser }
+    const handleClick = async () => {
+      await logout()
+      if (!error.value) {
+        router.push({ name: 'Welcome' })
+      }
+    }
+
+    const gotoLogin = () => {
+      router.push({ name: 'Welcome' })
+    }
+    const gotoProfile = () => {
+      router.push({ path: '/profile' })
+    }
+
+    return { loggedUser, handleClick, gotoLogin, gotoProfile }
   }
 }
 </script>
