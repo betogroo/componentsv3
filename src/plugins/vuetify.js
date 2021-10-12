@@ -14,7 +14,8 @@ import {
   VAppBarNavIcon,
   VAppBarTitle,
   VDivider,
-  VSpacer
+  VSpacer,
+  VSlideXReverseTransition
 } from 'vuetify/lib/components'
 // import * as directives from 'vuetify/lib/directives'
 console.log(VSpacer)
@@ -35,7 +36,8 @@ export default createVuetify({
     VAppBarNavIcon,
     VAppBarTitle,
     VDivider,
-    VSpacer
+    VSpacer,
+    VSlideXReverseTransition
   }
   // directives
 })
