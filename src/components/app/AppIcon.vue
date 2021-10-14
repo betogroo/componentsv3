@@ -1,5 +1,5 @@
 <template>
-  <v-icon v-bind="$attrs">
+  <v-icon class="mx-2" v-bind="$attrs">
     {{ `mdi-${icon}` }}
   </v-icon>
 </template>
@@ -16,5 +16,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

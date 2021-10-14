@@ -1,17 +1,13 @@
 <template>
   <v-slide-x-reverse-transition>
-    <app-icon
-      v-if="displayWidth > 400"
-      icon="flare"
-      @click="actionItemOne"
-    ></app-icon>
+    <app-badge v-if="displayWidth > 400" content="2">
+      <app-icon icon="magnify" @click="actionItemTwo"></app-icon>
+    </app-badge>
   </v-slide-x-reverse-transition>
   <v-slide-x-reverse-transition>
-    <app-icon
-      v-if="displayWidth > 480"
-      icon="magnify"
-      @click="actionItemTwo"
-    ></app-icon>
+    <app-badge v-if="displayWidth > 480" content="11">
+      <app-icon icon="magnify" @click="actionItemTwo"></app-icon>
+    </app-badge>
   </v-slide-x-reverse-transition>
   <v-slide-x-reverse-transition>
     <app-icon
@@ -52,10 +48,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.v-icon {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-</style>

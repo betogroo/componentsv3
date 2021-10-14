@@ -3,6 +3,7 @@ import 'vuetify/lib/styles/main.sass'
 import { createVuetify } from 'vuetify'
 import {
   VApp,
+  VBadge,
   VMain,
   VCol,
   VRow,
@@ -25,6 +26,7 @@ export default createVuetify({
   },
   components: {
     VApp,
+    VBadge,
     VMain,
     VCol,
     VRow,
