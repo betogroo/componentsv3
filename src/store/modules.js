@@ -1,7 +1,7 @@
 import { store as auth } from '@/modules/core/auth'
-import { store as chat } from '@/modules/widgets/chat'
+import { store as course } from '@/modules/widgets/course'
 
 export default {
   auth,
-  chat
+  course
 }

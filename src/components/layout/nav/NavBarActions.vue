@@ -1,7 +1,7 @@
 <template>
   <v-slide-x-reverse-transition>
     <app-badge v-if="displayWidth > 400" content="2">
-      <app-icon icon="magnify" @click="actionItemTwo"></app-icon>
+      <app-icon icon="flare" @click="actionItemTwo"></app-icon>
     </app-badge>
   </v-slide-x-reverse-transition>
   <v-slide-x-reverse-transition>

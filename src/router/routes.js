@@ -1,5 +1,5 @@
 import { routes as auth } from '@/modules/core/auth/'
 import { routes as home } from '@/modules/core/home/'
-import { routes as chat } from '@/modules/widgets/chat/'
+import { routes as course } from '@/modules/widgets/course/'
 
-export default [...home, ...chat, ...auth]
+export default [...home, ...auth, ...course]

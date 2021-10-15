@@ -16,7 +16,8 @@ import {
   VAppBarTitle,
   VDivider,
   VSpacer,
-  VSlideXReverseTransition
+  VSlideXReverseTransition,
+  VExpandTransition
 } from 'vuetify/lib/components'
 // import * as directives from 'vuetify/lib/directives'
 console.log(VSpacer)
@@ -39,7 +40,8 @@ export default createVuetify({
     VAppBarTitle,
     VDivider,
     VSpacer,
-    VSlideXReverseTransition
+    VSlideXReverseTransition,
+    VExpandTransition
   }
   // directives
 })
