@@ -1,6 +1,5 @@
 <template>
   <v-badge
-    tile
     :offset-x="content > 10 ? '6' : '4'"
     offset-y="1"
     :modelValue="active"
