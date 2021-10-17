@@ -1,3 +1,5 @@
+import router from '@/router'
+
 const useUtils = () => {
   const delay = (amount = 2000) => {
     console.log(`Delay de ${amount / 1000} segundos`)
@@ -34,7 +36,25 @@ const useUtils = () => {
     return val
   }
 
-  return { breakpointCardSize, delay }
+  const filteredRoutes = (filter) => {
+    const routes = router.options.routes
+    console.log(router.options.routes)
+    const filteredRoutes = routes.filter(
+      (item) => item.meta && item.meta[filter] === true
+    )
+    const data = filteredRoutes.map((item) => {
+      return {
+        // id: this.uuid4(),
+        title: item.meta.title,
+        name: item.name,
+        path: item.path,
+        icon: item.meta.icon || ''
+      }
+    })
+    return data
+  }
+
+  return { breakpointCardSize, delay, filteredRoutes }
 }
 
 export default useUtils
