@@ -36,6 +36,7 @@ export default {
   setup(props) {
     const router = useRouter()
     const store = useStore()
+    store.dispatch('home/setContextualAppBar', true)
     const course = computed(() => {
       const courses = store.state.course.courses
       return courses.find((item) => item.id === props.id)

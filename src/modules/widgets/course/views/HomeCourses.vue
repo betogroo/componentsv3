@@ -20,6 +20,7 @@ export default {
 
   setup() {
     const store = useStore()
+    store.dispatch('home/setContextualAppBar', false)
 
     const courses = computed(() => {
       return store.state.course.courses
