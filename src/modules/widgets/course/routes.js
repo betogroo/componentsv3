@@ -1,9 +1,14 @@
+import store from '@/store'
+
 export default [
   {
     path: '/courses',
     name: 'Courses',
     component: () =>
       import(/* webpackChunkName: "course" */ './views/HomeCourses'),
+    beforeEnter: () => {
+      store.dispatch('home/setContextualAppBar', false)
+    },
     //beforeEnter: requireAuth,
     meta: {
       title: 'Cursos',
@@ -15,6 +20,9 @@ export default [
     name: 'Course',
     component: () =>
       import(/* webpackChunkName: "course" */ './views/DetailsCourse'),
+    beforeEnter: () => {
+      store.dispatch('home/setContextualAppBar', true)
+    },
     props: true,
     meta: {
       title: 'Curso'
@@ -24,6 +32,9 @@ export default [
     path: '/courses/:id/classes/:idClass',
     name: 'Class',
     component: () => import(/* webpackChunkName: "course" */ './views/Class'),
+    beforeEnter: () => {
+      store.dispatch('home/setContextualAppBar', true)
+    },
     props: true,
     meta: {
       title: 'Class'
