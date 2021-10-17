@@ -38,7 +38,6 @@ const useUtils = () => {
 
   const filteredRoutes = (filter) => {
     const routes = router.options.routes
-    console.log(router.options.routes)
     const filteredRoutes = routes.filter(
       (item) => item.meta && item.meta[filter] === true
     )

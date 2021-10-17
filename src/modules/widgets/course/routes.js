@@ -6,7 +6,8 @@ export default [
       import(/* webpackChunkName: "course" */ './views/HomeCourses'),
     //beforeEnter: requireAuth,
     meta: {
-      title: 'Cursos'
+      title: 'Cursos',
+      inNav: true
     }
   },
   {
