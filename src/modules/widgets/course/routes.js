@@ -5,7 +5,7 @@ export default [
     path: '/courses',
     name: 'Courses',
     component: () =>
-      import(/* webpackChunkName: "course" */ './views/HomeCourses'),
+      import(/* webpackChunkName: "course" */ './views/CourseList'),
     beforeEnter: () => {
       store.dispatch('home/setContextualAppBar', false)
     },
@@ -18,8 +18,7 @@ export default [
   {
     path: '/courses/:id',
     name: 'Course',
-    component: () =>
-      import(/* webpackChunkName: "course" */ './views/DetailsCourse'),
+    component: () => import(/* webpackChunkName: "course" */ './views/Course'),
     beforeEnter: () => {
       store.dispatch('home/setContextualAppBar', true)
     },

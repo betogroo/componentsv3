@@ -15,7 +15,7 @@ import { useStore } from 'vuex'
 import CourseCard from '../components/CourseCard'
 
 export default {
-  name: 'HomeCourses',
+  name: 'CourseList',
 
   components: {
     CourseCard

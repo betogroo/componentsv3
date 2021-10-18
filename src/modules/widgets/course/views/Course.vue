@@ -9,7 +9,7 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import CourseDetails from '../components/CourseDetails.vue'
 export default {
-  name: 'DetailsCourse',
+  name: 'Course',
 
   components: {
     CourseDetails
