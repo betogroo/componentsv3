@@ -1,22 +1,25 @@
 <template>
   <h1>Cursos</h1>
-  <ul>
-    <router-link
-      v-for="item in courses"
-      :key="item.id"
-      :to="{ name: 'Course', params: { id: item.id } }"
-    >
-      <li>{{ item.title }}</li>
-    </router-link>
-  </ul>
+  <div class="d-flex flex-column align-center">
+    <course-card
+      v-for="course in courses"
+      :key="course.id"
+      :course="course"
+    ></course-card>
+  </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import CourseCard from '../components/CourseCard'
 
 export default {
   name: 'HomeCourses',
+
+  components: {
+    CourseCard
+  },
 
   setup() {
     const store = useStore()
@@ -24,6 +27,8 @@ export default {
     const courses = computed(() => {
       return store.state.course.courses
     })
+
+    console.log(courses)
 
     return { courses }
   }

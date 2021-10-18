@@ -8,10 +8,10 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 export default {
-  name: 'Class',
+  name: 'Lesson',
 
   props: {
-    idClass: {
+    idLesson: {
       type: String,
       required: true
     },
@@ -27,7 +27,7 @@ export default {
       return store.state.course.courses.find((item) => item.id === props.id)
     })
     const lesson = computed(() => {
-      return course.value.classes.find((item) => item.id === props.idClass)
+      return course.value.lessons.find((item) => item.id === props.idLesson)
     })
 
     return { course, lesson }

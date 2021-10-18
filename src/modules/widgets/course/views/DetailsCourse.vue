@@ -1,30 +1,19 @@
 <template>
-  <h1>Curso {{ course.title }} - {{ countClasses }} aulas</h1>
-  <p>{{ course.description }}</p>
-  <ul>
-    <router-link
-      v-for="item in course.classes"
-      :key="item.id"
-      :to="{
-        name: 'Class',
-        params: {
-          id: course.id,
-          idClass: item.id
-        }
-      }"
-    >
-      <li>{{ item.title }}</li>
-    </router-link>
-  </ul>
+  <course-details :course="course"></course-details>
   <app-btn variant="text" @click="router.back">Voltar</app-btn>
 </template>
 
 <script>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import CourseDetails from '../components/CourseDetails.vue'
 export default {
   name: 'DetailsCourse',
+
+  components: {
+    CourseDetails
+  },
 
   props: {
     id: {
@@ -35,16 +24,16 @@ export default {
 
   setup(props) {
     const router = useRouter()
+
     const store = useStore()
     const course = computed(() => {
       const courses = store.state.course.courses
-      return courses.find((item) => item.id === props.id)
-    })
-    const countClasses = computed(() => {
-      return course.value.classes.length
+      const course = courses.find((item) => item.id === props.id)
+      const count = course.lessons.length
+      return { ...course, count }
     })
 
-    return { router, course, countClasses }
+    return { router, course }
   }
 }
 </script>

@@ -18,7 +18,7 @@ export default {
       Com a formação Node.js, você vai aprender TODAS as habilidades essenciais para construção de qualquer aplicação web real. Tudo em um único curso.
       É o melhor momento para aprender Node.js
       Segunda uma pesquisa do Stackoverflow, Node.js está entre as 3 tecnologias back-end mais populares do mundo. Com muitas vagas de empregos disponíveis, com salários que chegam até 10.000 R$ por mês.`,
-      classes: [
+      lessons: [
         { id: '20829bff-8872-498e-8c3e-028de3441de6', title: 'Node.js' },
         { id: 'b3128013-4568-4bc8-8e3b-3a84c5881ede', title: 'ES6/ES7' },
         { id: '226e4f4c-656a-41ef-8f44-f82c3d89545c', title: 'Express.js' },
@@ -35,10 +35,10 @@ export default {
       title: 'PHP',
       description:
         'Este Curso de PHP 7 Completo vai proporcionar em um só lugar tudo o que precisa saber para criar seu próprio website. A equipe de instrutores da Hcode estará disponível para responder suas dúvidas. ',
-      classes: [
+      lessons: [
         { id: '381d1a5e-6ecd-430b-852f-731de41c3010', title: 'Instalação' },
         { id: 'd7c03317-1d4f-492c-b6b6-f643dfcc4b16', title: 'Variáveis' },
-        { id: 'cd3b6198-38c9-43cf-8ecf-757069459b27', title: 'Classes' },
+        { id: 'cd3b6198-38c9-43cf-8ecf-757069459b27', title: 'lessons' },
         { id: '249031ad-f574-49da-89a9-337d8954faf8', title: 'Objetos' },
         { id: '0e5d0f2e-6548-4765-a050-27ec18fbafea', title: 'Conclusão' }
       ]
@@ -51,7 +51,7 @@ export default {
       Com uma curva de aprendizado muito baixa, Vue entrega ao desenvolvedor as ferramentas essenciais a qualquer projeto, seja ele de pequeno até grandeporte a nível empresarial, e tudo o que você precisa saber é JavaScript, nada mais!
       Vagas de emprego que demandam conhecimento em Frameworks como o VueJS estão em alta e entre as mais bem pagas do mercado, e este é o momento perfeito para você conhecê-lo e em detalhes!
       Venha comigo e vamos fazer uma incrível viagem ao mundo do VueJS!`,
-      classes: [
+      lessons: [
         { id: 'f4b28d03-c505-4bed-bdbd-6c4863b44b18', title: 'Front-end' },
         { id: '9d685172-b6db-4308-876b-3f41f88e14f4', title: 'Instalação' },
         { id: '727b6d6e-36ba-4fee-8fac-2b38865ddbfd', title: 'Diretivas' },

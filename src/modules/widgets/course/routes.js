@@ -29,15 +29,15 @@ export default [
     }
   },
   {
-    path: '/courses/:id/classes/:idClass',
-    name: 'Class',
-    component: () => import(/* webpackChunkName: "course" */ './views/Class'),
+    path: '/courses/:id/lessons/:idLesson',
+    name: 'Lesson',
+    component: () => import(/* webpackChunkName: "course" */ './views/Lesson'),
     beforeEnter: () => {
       store.dispatch('home/setContextualAppBar', true)
     },
     props: true,
     meta: {
-      title: 'Class'
+      title: 'Lesson'
     }
   }
 ]
