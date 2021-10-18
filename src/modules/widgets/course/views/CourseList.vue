@@ -1,5 +1,6 @@
 <template>
   <h1>Cursos</h1>
+  {{ coursesPending }}
   <div class="d-flex flex-column align-center">
     <course-card
       v-for="course in courses"
@@ -10,9 +11,9 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
+// import { computed } from 'vue'
 import CourseCard from '../components/CourseCard'
+import getItems from '@/composables/getItems'
 
 export default {
   name: 'CourseList',
@@ -22,15 +23,20 @@ export default {
   },
 
   setup() {
-    const store = useStore()
+    const {
+      items: courses,
+      error: coursesError,
+      load: loadCourses,
+      isPending: coursesPending
+    } = getItems()
 
-    const courses = computed(() => {
-      return store.state.course.courses
-    })
+    loadCourses('courses')
 
-    console.log(courses)
-
-    return { courses }
+    return {
+      courses,
+      coursesError,
+      coursesPending
+    }
   }
 }
 </script>
