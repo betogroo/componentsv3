@@ -36,7 +36,8 @@ export default [
     },
     props: true,
     meta: {
-      title: 'Lesson'
+      title: 'Lesson',
+      requireAuth: true
     }
   }
 ]

@@ -4,7 +4,8 @@ export default [
     name: 'Home',
     component: () => import(/* webpackChunkName: "home" */ './views/Home'),
     meta: {
-      title: 'Home'
+      title: 'Home',
+      requireAuth: true
     }
   },
   {
