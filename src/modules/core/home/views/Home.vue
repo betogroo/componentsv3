@@ -19,20 +19,34 @@
         >{{ item.title }}</router-link
       >
     </div>
+    <div>{{ x }} - {{ y }}</div>
+    <div>{{ breakpoints }}</div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { useUtils } from '@/composables'
 import { useLogout } from '@/modules/core/auth/composables'
+import { useMouse, useBreakpoints, breakpointsVuetify } from '@vueuse/core'
 export default {
   name: 'Home',
 
   setup() {
     const store = useStore()
+    const { x, y } = useMouse()
+    watch(
+      () => [x.value, y.value],
+      () => {
+        if (x.value === 0 || y.value === 0) {
+          alert('Não fuja')
+        }
+      }
+    )
+    const breakpoints = useBreakpoints(breakpointsVuetify)
+    console.log(breakpoints)
     const { filteredRoutes } = useUtils()
     const inNavRoutes = filteredRoutes('inNav')
     const loggedUser = computed(() => {
@@ -55,7 +69,16 @@ export default {
       router.push({ path: '/profile' })
     }
 
-    return { inNavRoutes, loggedUser, handleClick, gotoLogin, gotoProfile }
+    return {
+      inNavRoutes,
+      loggedUser,
+      handleClick,
+      gotoLogin,
+      gotoProfile,
+      x,
+      y,
+      breakpoints
+    }
   }
 }
 </script>
