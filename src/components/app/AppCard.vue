@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-2" v-bind="($attrs, cardDefaults)">
+  <v-card v-bind="($attrs, cardDefaults)">
     <slot />
   </v-card>
 </template>
@@ -11,8 +11,7 @@ export default {
 
   setup() {
     const cardDefaults = computed(() => ({
-      elevation: 2,
-      width: 300
+      elevation: 0
     }))
 
     return { cardDefaults }

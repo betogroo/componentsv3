@@ -1,13 +1,13 @@
 <template>
   <h1>Cursos</h1>
   {{ coursesPending }}
-  <div class="d-flex flex-column align-center">
+  <v-row class="d-flex justify-space-around">
     <course-card
       v-for="course in courses"
       :key="course.id"
       :course="course"
     ></course-card>
-  </div>
+  </v-row>
 </template>
 
 <script>
