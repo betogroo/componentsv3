@@ -1,7 +1,7 @@
 <template>
   <h1>Cursos</h1>
   {{ coursesPending }}
-  <v-row class="d-flex justify-space-around">
+  <v-row no-gutters class="d-flex justify-space-around">
     <course-card
       v-for="course in courses"
       :key="course.id"
