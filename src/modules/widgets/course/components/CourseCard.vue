@@ -1,6 +1,7 @@
 <template>
   <app-card
-    class="pa-2"
+    class="pa-1 mb-2"
+    elevation="2"
     width="300"
     height="200"
     @click="$router.push({ name: 'Course', params: { id: course.id } })"
